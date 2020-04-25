@@ -111,10 +111,10 @@ getMgmtDisc <- function(cik.no, filing.year) {
         # See if 10-K is in XLBR or old text format
         if (any(grepl(pattern = "<xml>|<type>xml|<html>|10k.htm", filing.text, ignore.case = T))) {
             
-            doc <- XML::htmlParse(filing.text, asText = TRUE)
+            doc <- XML::htmlParse(filing.text, asText = TRUE, addFinalizer=FALSE)
             
             f.text <- XML::xpathSApply(doc, "//text()[not(ancestor::script)][not(ancestor::style)][not(ancestor::noscript)][not(ancestor::form)]", 
-                XML::xmlValue)
+                XML::xmlValue, addFinalizer = FALSE)
             
             f.text <- iconv(f.text, "latin1", "ASCII", sub = " ")
             
@@ -173,9 +173,9 @@ getMgmtDisc <- function(cik.no, filing.year) {
           writeLines(md.dicusssion, filename2)
           output$extract.status[i] <- 1
         }
-
-        rm(f.text); XML::free(doc)
-        
+        XML::free(doc)
+        rm(f.text) 
+        gc()
         # update progress bar
         setTxtProgressBar(progress.bar, i)
     }

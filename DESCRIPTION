@@ -1,11 +1,11 @@
 Package: edgar
 Type: Package
 Title: Platform for EDGAR Filing Management and Textual Analysis
-Version: 2.0.2
-Date: 2019-08-22
+Version: 2.0.3
+Date: 2020-04-25
 Author: Gunratan Lonare <lonare.gunratan@gmail.com>, Bharat Patil
-    <bharatspatil@gmail.com>
-Maintainer: Gunratan Lonare <lonare.gunratan@gmail.com>
+    <bharatspatil@gmail.com>, Jonathan Fluharty <Jonathan.Fluharty@mail.wvu.edu>
+Maintainer: Jonathan Fluharty <Jonathan.Fluharty@mail.wvu.edu>
 Depends: R (>= 3.1)
 Imports: R.utils, tm, XML, stringr, stringi, qdapRegex
 Description: In the USA, companies file different forms with the U.S. 
@@ -21,10 +21,14 @@ Description: In the USA, companies file different forms with the U.S.
   "Management's Discussion and Analysis(Item 7)" sections of annual 
   statements, search filings for desired words, provides sentiment 
   measures, parse filing header information, and provides HTML 
-  view of SEC filings.  
+  view of SEC filings.  (Update JTFJ, the package suffered from memory
+  leak in the extraction of data. When pushing the package to use in a 
+  parallel extraction, the session would often fail. This means that downloading
+  large amounts of financial statements for any sort of analysis was problematic.
+  I adjusted the XML code to allow it to run over a long-period of time.)
 License: GPL-2
 RoxygenNote: 6.1.1
 NeedsCompilation: no
 Packaged: 2019-08-22 17:48:23 UTC; GLONARE
 Repository: CRAN
-Date/Publication: 2019-08-29 20:40:02 UTC
+Date/Publication: 2020-04-25 20:40:02 UTC
